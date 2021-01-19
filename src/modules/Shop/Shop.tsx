@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import { useSelector, useDispatch } from 'react-redux'
+import { AppState } from "../../redux/rootReducer";
+import { addToCartAction, removeFromCartAction } from '../../redux/actions/cartActions'
+import { setAlertAction } from '../../redux/actions/alertActions'
+import { Alert } from "../../redux/types/Alert/Alert";
 interface ShopTypes {
   id: number,
   name: string,
@@ -7,9 +11,12 @@ interface ShopTypes {
 }
 
 const Shop = (): JSX.Element => {
-  const [cart, setCart] = useState<ShopTypes[]>([]);
-  const [alert, setAlert] = useState("");
-  const [cartTotal, setCartTotal] = useState(0);
+  // const [alert, setAlert] = useState<string>("");
+  const [cartTotal, setCartTotal] = useState<number>(0);
+
+  const dispatch = useDispatch()
+  const { cart } = useSelector((state: AppState) => state.cartReducer)
+  const { alert } = useSelector((state: AppState) => state.alertReducer)
 
   const items: ShopTypes[] = [
     {
@@ -47,16 +54,16 @@ const Shop = (): JSX.Element => {
       if (cart[i].id === el.id) addIt = false;
     }
     if (addIt) {
-      setCart([...cart, el]);
-      setAlert("");
-    } else setAlert(`${el.name} is already in your cart`);
+      dispatch(addToCartAction(el))
+      dispatch(setAlertAction(null as unknown as Alert))
+    }
+    else dispatch(setAlertAction(`${el.name} is already in your cart` as unknown as Alert))
+
   };
 
   const removeFromCart = (el: ShopTypes): void => {
-    let hardCopy = [...cart];
-    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
-    setCart(hardCopy);
-    setAlert("");
+    dispatch(removeFromCartAction(el, cart))
+    dispatch(setAlertAction(null as unknown as Alert))
   };
 
   const listItems: JSX.Element[] = items.map((el: ShopTypes) => (
@@ -80,7 +87,7 @@ const Shop = (): JSX.Element => {
       <div>CART</div>
       <div>{cartItems}</div>
       <div>Total: ${cartTotal}</div>
-      <div>Alert Message: {alert}</div>
+      <div>Alert Message: {!!alert && alert}</div>
     </div>
   );
 };
