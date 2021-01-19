@@ -11,7 +11,6 @@ interface ShopTypes {
 }
 
 const Shop = (): JSX.Element => {
-  // const [alert, setAlert] = useState<string>("");
   const [cartTotal, setCartTotal] = useState<number>(0);
 
   const dispatch = useDispatch()
@@ -36,17 +35,17 @@ const Shop = (): JSX.Element => {
     },
   ];
 
-  useEffect(() => {
-    total();
-  }, [cart]);
+  // useEffect(() => {
+  //   total();
+  // }, [cart]);
 
-  const total = () => {
-    let totalVal = 0;
-    for (let i = 0; i < cart.length; i++) {
-      totalVal += cart[i].price;
-    }
-    setCartTotal(totalVal);
-  };
+  // const total = () => {
+  //   let totalVal = 0;
+  //   for (let i = 0; i < cart.length; i++) {
+  //     totalVal += cart[i].price;
+  //   }
+  //   setCartTotal(totalVal);
+  // };
 
   const addToCart = (el: ShopTypes): void => {
     let addIt = true;

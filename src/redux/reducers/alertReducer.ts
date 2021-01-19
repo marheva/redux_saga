@@ -1,4 +1,5 @@
-import { AlertActionTypes, SET_ALERT } from "../types/Alert/type";
+import { AlertActionTypes } from "../types/Alert/type";
+import { SET_ALERT } from "../types/types";
 
 export interface AlertReducerStateTypes {
   alert: null | string;

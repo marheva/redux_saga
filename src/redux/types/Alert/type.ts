@@ -1,6 +1,5 @@
 import { Alert } from "./Alert";
-
-const SET_ALERT = "ALERT/SET_ALERT";
+import { SET_ALERT } from "../types";
 
 export interface setAlert {
   type: typeof SET_ALERT;
@@ -8,5 +7,3 @@ export interface setAlert {
 }
 
 export type AlertActionTypes = setAlert;
-
-export { SET_ALERT };

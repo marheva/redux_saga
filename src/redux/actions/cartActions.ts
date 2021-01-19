@@ -1,5 +1,6 @@
 import { CartItem } from "../types/Cart/CartItem";
-import { ADD_TO_CART, REMOVE_FROM_CART, CartActionTypes } from "../types/Cart/type";
+import { CartActionTypes } from "../types/Cart/type";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../types/types";
 
 export function addToCartAction(item: CartItem): CartActionTypes {
   return {

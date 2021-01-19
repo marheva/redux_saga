@@ -1,5 +1,6 @@
 import { CartItem } from "../types/Cart/CartItem";
-import { CartActionTypes, ADD_TO_CART, REMOVE_FROM_CART } from "../types/Cart/type";
+import { CartActionTypes } from "../types/Cart/type";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../types/types";
 
 export interface CartReducerStateTypes {
   cart: CartItem[];
