@@ -95,10 +95,10 @@ const Shop = (): JSX.Element => {
       STORE
       <div>
         {returnEmployee(employee?.name.first)}
-        {returnCustomer(customer?.name.first)}
       </div>
       <div>{listItems}</div>
       <div>CART</div>
+      <div>{returnCustomer(customer?.name.first)}</div>
       <div>{cartItems}</div>
       <div>Total: ${total}</div>
       <div>Alert Message: {!!alert && alert}</div>
