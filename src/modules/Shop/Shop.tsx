@@ -11,6 +11,8 @@ interface ShopTypes {
   price: number
 }
 
+// Just ONE BIG FILE => example!!! no small components!
+//
 const Shop = (): JSX.Element => {
   const dispatch = useDispatch()
 
