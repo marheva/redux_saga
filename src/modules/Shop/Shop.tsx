@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from "../../redux/rootReducer";
 import { addToCartAction, removeFromCartAction } from '../../redux/actions/cartActions'
 import { setAlertAction } from '../../redux/actions/alertActions'
-import { findEmployee } from '../../redux/actions/userActions'
+import { findCustomer, findEmployee } from '../../redux/actions/userActions'
 import { Alert } from "../../redux/types/Alert/Alert";
 interface ShopTypes {
   id: number,
@@ -12,8 +12,8 @@ interface ShopTypes {
 }
 
 const Shop = (): JSX.Element => {
-
   const dispatch = useDispatch()
+
   const { cart, total } = useSelector((state: AppState) => state.cartReducer)
   const { alert } = useSelector((state: AppState) => state.alertReducer)
   const { employee, customer } = useSelector((state: AppState) => state.userReducer)
@@ -72,12 +72,28 @@ const Shop = (): JSX.Element => {
     dispatch(findEmployee())
   }
 
+  function callForCustomer() {
+    dispatch(findCustomer())
+  }
+
+  function returnEmployee(employeeName?: string): JSX.Element {
+    return (<>{`Employee name: ${`first`} ${employeeName}`}
+      <input type={'submit'} value={'Find employee'} onClick={() => callForEmployee()} />
+    </>)
+  }
+  function returnCustomer(customerName?: string): JSX.Element {
+    return (<>{`Employee name: ${`first`} ${customerName}`}
+      <input type={'submit'} value={'Find employee'} onClick={() => callForCustomer()} />
+    </>)
+  }
+
+
   return (
     <div>
       STORE
       <div>
-        {`Employee name: ${`first`} ${employee?.name.first}`}
-        <input type={'submit'} value={'Find employee'} onClick={() => callForEmployee()} />
+        {returnEmployee(employee?.name.first)}
+        {returnCustomer(customer?.name.first)}
       </div>
       <div>{listItems}</div>
       <div>CART</div>
