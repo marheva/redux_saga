@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from "../../redux/rootReducer";
 import { addToCartAction, removeFromCartAction } from '../../redux/actions/cartActions'
 import { setAlertAction } from '../../redux/actions/alertActions'
+import { findEmployee } from '../../redux/actions/userActions'
 import { Alert } from "../../redux/types/Alert/Alert";
 interface ShopTypes {
   id: number,
@@ -15,6 +16,7 @@ const Shop = (): JSX.Element => {
   const dispatch = useDispatch()
   const { cart, total } = useSelector((state: AppState) => state.cartReducer)
   const { alert } = useSelector((state: AppState) => state.alertReducer)
+  const { employee, customer } = useSelector((state: AppState) => state.userReducer)
 
   const items: ShopTypes[] = [
     {
@@ -66,9 +68,17 @@ const Shop = (): JSX.Element => {
     </div>
   ));
 
+  function callForEmployee() {
+    dispatch(findEmployee())
+  }
+
   return (
     <div>
       STORE
+      <div>
+        {`Employee name: ${`first`} ${employee?.name.first}`}
+        <input type={'submit'} value={'Find employee'} onClick={() => callForEmployee()} />
+      </div>
       <div>{listItems}</div>
       <div>CART</div>
       <div>{cartItems}</div>
