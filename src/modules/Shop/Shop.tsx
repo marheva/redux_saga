@@ -11,10 +11,9 @@ interface ShopTypes {
 }
 
 const Shop = (): JSX.Element => {
-  const [cartTotal, setCartTotal] = useState<number>(0);
 
   const dispatch = useDispatch()
-  const { cart } = useSelector((state: AppState) => state.cartReducer)
+  const { cart, total } = useSelector((state: AppState) => state.cartReducer)
   const { alert } = useSelector((state: AppState) => state.alertReducer)
 
   const items: ShopTypes[] = [
@@ -35,25 +34,13 @@ const Shop = (): JSX.Element => {
     },
   ];
 
-  // useEffect(() => {
-  //   total();
-  // }, [cart]);
-
-  // const total = () => {
-  //   let totalVal = 0;
-  //   for (let i = 0; i < cart.length; i++) {
-  //     totalVal += cart[i].price;
-  //   }
-  //   setCartTotal(totalVal);
-  // };
-
   const addToCart = (el: ShopTypes): void => {
     let addIt = true;
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].id === el.id) addIt = false;
     }
     if (addIt) {
-      dispatch(addToCartAction(el))
+      dispatch(addToCartAction(el, cart))
       dispatch(setAlertAction(null as unknown as Alert))
     }
     else dispatch(setAlertAction(`${el.name} is already in your cart` as unknown as Alert))
@@ -72,7 +59,7 @@ const Shop = (): JSX.Element => {
     </div>
   ));
 
-  const cartItems: JSX.Element[] = cart.map((el) => (
+  const cartItems: JSX.Element[] = cart.map((el: any) => (
     <div key={el.id}>
       {`${el.name}: $${el.price}`}
       <input type="submit" value="remove" onClick={() => removeFromCart(el)} />
@@ -85,7 +72,7 @@ const Shop = (): JSX.Element => {
       <div>{listItems}</div>
       <div>CART</div>
       <div>{cartItems}</div>
-      <div>Total: ${cartTotal}</div>
+      <div>Total: ${total}</div>
       <div>Alert Message: {!!alert && alert}</div>
     </div>
   );
