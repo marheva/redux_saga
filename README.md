@@ -12,4 +12,4 @@
 
 ##### Links:
 
-- [Taming Redux with Sagas](https://objectpartners.com/2017/11/20/taming-redux-with-sagas/m)
+- [Taming Redux with Sagas](https://objectpartners.com/2017/11/20/taming-redux-with-sagas/)
