@@ -5,3 +5,7 @@
 - implementation with `redux redux-thunk` => redux thunk;
 - implementation with `redux redux-saga` => sagas =>
   - yield put === dispatch( from the thunk )
+
+#### new branch `redux-saga`
+
+- implemented saga
