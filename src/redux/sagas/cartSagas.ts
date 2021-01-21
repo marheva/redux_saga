@@ -1,31 +1,26 @@
-import { put, takeEvery, call, all, take, takeLatest } from "redux-saga/effects";
+import { put, takeEvery, all } from "redux-saga/effects";
 import { ADD_TO_CART, ADD_TO_CART_SAGA, REMOVE_FROM_CART, REMOVE_FROM_CART_SAGA } from "../types/types";
 
-import { CartItem } from "../types/Cart/CartItem";
+import total from "./helpers/total";
 
-function total(newCart: CartItem[]) {
-  let totalValue = 0;
-  for (let i = 0; i < newCart.length; i++) {
-    totalValue += newCart[i].price;
-  }
-  return totalValue;
+function wait(ms: number) {
+  return new Promise((res) => setTimeout(res, ms));
 }
 
-export function* addToCartSaga() {
-  const action = yield take([ADD_TO_CART_SAGA]);
+export function* addToCartSaga(action: any) {
   const { cart, item } = action.payload;
 
   const newCart = [...cart, item];
   const newTotal = total(newCart);
 
+  yield wait(1000);
   yield put({
     type: ADD_TO_CART,
     payload: { newCart: newCart, newTotal: newTotal },
   });
 }
 
-export function* removeFromCartSaga() {
-  const action = yield take([REMOVE_FROM_CART_SAGA]);
+export function* removeFromCartSaga(action: any) {
   const { cart, item } = action.payload;
 
   let hardCopy = [...cart];
