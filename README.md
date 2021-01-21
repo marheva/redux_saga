@@ -9,3 +9,7 @@
 #### new branch `redux-saga`
 
 - implemented saga
+
+##### Links:
+
+- [Taming Redux with Sagas](https://objectpartners.com/2017/11/20/taming-redux-with-sagas/m)
