@@ -9,3 +9,7 @@
 #### new branch `redux-saga`
 
 - implemented saga
+
+---
+
+![img](/home/roman/Desktop/saga.png)
