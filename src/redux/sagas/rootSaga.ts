@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
 import { watchAddToCartSaga, watchRemoveFromCartSaga } from "./cartSagas";
-import { watchFindCustomerSaga, watchFindEmployeeSaga, watchFindBothSaga } from "./userSaga";
+import { watchFindCustomerSaga, watchFindEmployeeSaga, watchFindBothSaga, watchRaceMeSaga } from "./userSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -9,5 +9,6 @@ export default function* rootSaga() {
     watchFindEmployeeSaga(),
     watchFindCustomerSaga(),
     watchFindBothSaga(),
+    watchRaceMeSaga(),
   ]);
 }

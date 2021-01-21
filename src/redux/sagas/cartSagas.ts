@@ -2,10 +2,7 @@ import { put, takeEvery, all } from "redux-saga/effects";
 import { ADD_TO_CART, ADD_TO_CART_SAGA, REMOVE_FROM_CART, REMOVE_FROM_CART_SAGA } from "../types/types";
 
 import total from "./helpers/total";
-
-function wait(ms: number) {
-  return new Promise((res) => setTimeout(res, ms));
-}
+import wait from "./helpers/wait";
 
 export function* addToCartSaga(action: any) {
   const { cart, item } = action.payload;

@@ -1,5 +1,14 @@
-import { put, takeEvery, call, race, all } from "redux-saga/effects";
-import { FIND_EMPLOYEE, FIND_EMPLOYEE_SAGA, FIND_CUSTOMER, FIND_CUSTOMER_SAGA, FIND_BOTH_SAGA } from "../types/types";
+import { put, takeEvery, race, all } from "redux-saga/effects";
+import {
+  FIND_EMPLOYEE,
+  FIND_EMPLOYEE_SAGA,
+  FIND_CUSTOMER,
+  FIND_CUSTOMER_SAGA,
+  FIND_BOTH_SAGA,
+  RACE_ME_SAGA,
+} from "../types/types";
+
+import wait from "./helpers/wait";
 
 export function* findEmployeeSaga() {
   const url = "https://randomuser.me/api/";
@@ -59,6 +68,21 @@ export function* findBothSaga(): any {
     }),
   ]);
 }
+export function* raceMe() {
+  const url = "https://randomuser.me/api/";
+  const setHeaders = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const { person, timeout } = yield race({
+    person: fetch(url, setHeaders),
+    timeout: wait(1000),
+  });
+  if (person) console.log("[RACE_ME => SUCCESS]");
+  else console.log("[RACE_ME => TO SLOOOOOOOOOW]");
+}
 
 export function* watchFindEmployeeSaga() {
   yield takeEvery(FIND_EMPLOYEE_SAGA, findEmployeeSaga);
@@ -70,4 +94,8 @@ export function* watchFindCustomerSaga() {
 
 export function* watchFindBothSaga() {
   yield takeEvery(FIND_BOTH_SAGA, findBothSaga);
+}
+
+export function* watchRaceMeSaga() {
+  yield takeEvery(RACE_ME_SAGA, raceMe);
 }

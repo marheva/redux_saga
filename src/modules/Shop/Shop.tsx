@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from "../../redux/rootReducer";
 import { addToCartAction, removeFromCartAction } from '../../redux/actions/cartActions'
 import { setAlertAction } from '../../redux/actions/alertActions'
-import { findBoth, findCustomer, findEmployee } from '../../redux/actions/userActions'
+import { findBoth, findCustomer, findEmployee, raceMe } from '../../redux/actions/userActions'
 import { Alert } from "../../redux/types/Alert/Alert";
+
 interface ShopTypes {
   id: number,
   name: string,
@@ -82,6 +83,10 @@ const Shop = (): JSX.Element => {
     dispatch(findBoth())
   }
 
+  function callForRaceMe() {
+    dispatch(raceMe())
+  }
+
   function returnEmployee(employeeName?: string): JSX.Element {
     return (<>{`Employee name: ${`first`} ${employeeName}`}
       <input type={'submit'} value={'Find employee'} onClick={() => callForEmployee()} />
@@ -94,15 +99,22 @@ const Shop = (): JSX.Element => {
     </>)
   }
 
-  function returnBoth(customerName?: string): JSX.Element {
+  function returnBoth(): JSX.Element {
     return (<>
       <input type={'submit'} value={'Find both'} onClick={() => callForBoth()} />
+    </>)
+  }
+
+  function returnRaceMe(): JSX.Element {
+    return (<>
+      <input type={'submit'} value={'Race me'} onClick={() => callForRaceMe()} />
     </>)
   }
 
   return (
     <div>
       <div>{returnBoth()}</div>
+      <div>{returnRaceMe()}</div>
       STORE
       <div>
         {returnEmployee(employee?.name.first)}
