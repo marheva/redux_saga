@@ -4,7 +4,7 @@ import ReduxThunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
 
 import { rootReducer } from "../rootReducer";
-import rootSaga from "../sagas/cartSagas";
+import rootSaga from "../sagas/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [ReduxThunk, sagaMiddleware];

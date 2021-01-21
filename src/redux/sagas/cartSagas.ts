@@ -40,7 +40,3 @@ export function* watchAddToCartSaga() {
 export function* watchRemoveFromCartSaga() {
   yield takeEvery(REMOVE_FROM_CART_SAGA, removeFromCartSaga);
 }
-
-export default function* rootSaga() {
-  yield all([watchAddToCartSaga(), watchRemoveFromCartSaga()]);
-}
